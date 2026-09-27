@@ -13,5 +13,16 @@ public class Transaction {
         this.credit_transaction = c;
         this.timestamp = LocalDateTime.now();
     }
-
+    public string getTransactionId(){
+        return Transation_Id;
+    }
+    public double getamount(){
+        return amount;
+    }
+    public bool getcredit(){
+        return credit_transaction;
+    }
+    public LocalDateTime getTime(){
+        return timestamp;
+    }
 }
