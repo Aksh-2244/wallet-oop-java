@@ -4,12 +4,14 @@
 package project.var;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
     @Test void Transaction() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+        Transaction classUnderTest = new Transaction("12ANS",3000,true);
+        assertEquals(classUnderTest.getTransactionId(),"12ANS");
+        assertEquals(classUnderTest.getamount(),3000);
+        assertEquals(classUnderTest. getcredit(),true);
     }
-
 }

@@ -7,19 +7,19 @@ public class Transaction {
     private boolean credit_transaction;
     private LocalDateTime timestamp;
       
-    Transaction(string transation_id,double a,boolean c){
+    Transaction(String transation_id,double a,boolean c){
         this.Transation_Id = transation_id;
         this.amount = a;
         this.credit_transaction = c;
         this.timestamp = LocalDateTime.now();
     }
-    public string getTransactionId(){
+    public String getTransactionId(){
         return Transation_Id;
     }
     public double getamount(){
         return amount;
     }
-    public bool getcredit(){
+    public boolean getcredit(){
         return credit_transaction;
     }
     public LocalDateTime getTime(){
