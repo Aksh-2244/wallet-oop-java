@@ -18,7 +18,7 @@ public class Wallet {
         throw new IllegalArgumentException("Amount cannot be negative");
        }else{
          balance+=k;
-         Transactions[op] = new Transaction(UpiId, k, false);
+         Transactions[op] = new Transaction(UpiId, k, true);
          op++;
        }
     }
@@ -29,7 +29,7 @@ public class Wallet {
         throw new IllegalArgumentException("balance is insufficient");
      }else{
         balance-=k;
-       Transactions[op] = new Transaction(UpiId, k, true);
+       Transactions[op] = new Transaction(UpiId, k, false);
         op++;
      } 
     }
@@ -44,6 +44,10 @@ public class Wallet {
         + "\nTransaction amount-" + Transactions[op-1].getamount()
         + "\nTransaction type-" + Transactions[op-1].getcredit();
     }
+    public Transaction[] getTransactions(){
+         return Transactions.clone();
+    }
+
 }
 
 
