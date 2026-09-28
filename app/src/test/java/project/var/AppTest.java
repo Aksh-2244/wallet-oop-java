@@ -14,4 +14,10 @@ class AppTest {
         assertEquals(classUnderTest.getamount(),3000);
         assertEquals(classUnderTest. getcredit(),true);
     }
+      @Test void Wallet() {
+        Wallet classUnderTest = new Wallet("12ANS",10000);
+        assertEquals(classUnderTest.getUpiId(),"12ANS");
+        assertEquals(classUnderTest.getbalance(),10000);
+    }
+
 }
