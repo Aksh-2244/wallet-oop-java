@@ -6,18 +6,32 @@ public class Wallet {
     private int op = 0;
     Wallet(String Id,double b){
         this.UpiId = Id;
-        this.balance = b;
+        if(b<0){
+            throw new IllegalArgumentException("Balance cannot be negative");
+        }else{
+          this.balance = b;;
+        }
         this.Transactions = new Transaction[500];
     }
     public void addmoney(double k){
-       balance+=k;
-       Transactions[op] = new Transaction(UpiId, k, false);
-       op++;
+       if(k<0){
+        throw new IllegalArgumentException("Amount cannot be negative");
+       }else{
+         balance+=k;
+         Transactions[op] = new Transaction(UpiId, k, false);
+         op++;
+       }
     }
     public void deductmoney(double k){
-      balance-=k;
+     if(k<0){
+        throw new IllegalArgumentException("Amount cannot be negative");
+     }else if(k>balance){
+        throw new IllegalArgumentException("balance is insufficient");
+     }else{
+        balance-=k;
        Transactions[op] = new Transaction(UpiId, k, true);
-       op++;
+        op++;
+     } 
     }
     public String getUpiId(){
         return UpiId;

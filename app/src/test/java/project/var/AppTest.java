@@ -19,5 +19,31 @@ class AppTest {
         assertEquals(classUnderTest.getUpiId(),"12ANS");
         assertEquals(classUnderTest.getbalance(),10000);
     }
+     @Test void failedinitiation() {
+       IllegalArgumentException exception =
+        assertThrows(IllegalArgumentException.class,
+            () -> new Wallet("12ANS",-1000));
+        assertEquals("Balance cannot be negative", exception.getMessage());
+    }
 
+     @Test void negativewithdrawal() {
+        Wallet classUnderTest = new Wallet("12ANS",10000);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+            () -> classUnderTest.deductmoney(-200));
+        assertEquals("Amount cannot be negative", exception.getMessage()); 
+    }
+
+     @Test void negativedeposit() {
+        Wallet classUnderTest = new Wallet("12ANS",10000);
+       IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+            () -> classUnderTest.addmoney(-200));
+        assertEquals("Amount cannot be negative", exception.getMessage());
+    }
+   
+    @Test void insufficientfunds() {
+        Wallet classUnderTest = new Wallet("12ANS",10000);
+       IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+            () -> classUnderTest.deductmoney(12200));
+        assertEquals("balance is insufficient", exception.getMessage());
+    }
 }
