@@ -1,4 +1,5 @@
 package project.var;
+import  java.time.LocalDateTime;
 public class Wallet {
     private String UpiId;
     private double balance;
@@ -18,7 +19,7 @@ public class Wallet {
         throw new IllegalArgumentException("Amount cannot be negative");
        }else{
          balance+=k;
-         Transactions[op] = new Transaction(UpiId, k, true);
+         Transactions[op] = new Transaction(UpiId, k, true,LocalDateTime.now());
          op++;
        }
     }
@@ -29,7 +30,7 @@ public class Wallet {
         throw new IllegalArgumentException("balance is insufficient");
      }else{
         balance-=k;
-       Transactions[op] = new Transaction(UpiId, k, false);
+       Transactions[op] = new Transaction(UpiId, k, false,LocalDateTime.now());
         op++;
      } 
     }
@@ -46,6 +47,9 @@ public class Wallet {
     }
     public Transaction[] getTransactions(){
          return Transactions.clone();
+    }
+    public int getOP(){
+        return op;
     }
 
 }

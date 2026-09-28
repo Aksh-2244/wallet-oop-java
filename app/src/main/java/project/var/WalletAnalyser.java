@@ -8,8 +8,8 @@ public class WalletAnalyser {
     }
     public double totalamountcredited(){
         Transaction T[] = wallet.getTransactions();
-        double a = 0;;
-        for(int i = 0;i<T.length;i++){
+        double a = 0;
+        for(int i = 0;i<wallet.getOP();i++){
            if(T[i].getcredit() == true){
            a+= T[i].getamount();
           }
@@ -19,7 +19,7 @@ public class WalletAnalyser {
     public double totalamountdebited(){
         Transaction T[] = wallet.getTransactions();
         double a = 0;;
-        for(int i = 0;i<T.length;i++){
+        for(int i = 0;i<wallet.getOP();i++){
            if(T[i].getcredit() == false){
            a+= T[i].getamount();
           }
@@ -29,12 +29,11 @@ public class WalletAnalyser {
     public double expenditure(LocalDateTime t1,LocalDateTime t2){
         Transaction T[] = wallet.getTransactions();
         double a = 0;
-        for(int i=0;i<T.length;i++){
+        for(int i=0;i<wallet.getOP();i++){
            if(T[i].getTime().isAfter(t1) && T[i].getTime().isBefore(t2) && T[i].getcredit() == false){
             a+= T[i].getamount();
            }
         }
         return a;
-    }
-
+}
 }

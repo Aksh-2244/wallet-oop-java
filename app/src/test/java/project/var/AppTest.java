@@ -7,9 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
+
 class AppTest {
     @Test void Transaction() {
-        Transaction classUnderTest = new Transaction("12ANS",3000,true);
+        Transaction classUnderTest = new Transaction("12ANS",3000,true,LocalDateTime.now());
         assertEquals(classUnderTest.getTransactionId(),"12ANS");
         assertEquals(classUnderTest.getamount(),3000);
         assertEquals(classUnderTest. getcredit(),true);
@@ -46,4 +48,33 @@ class AppTest {
             () -> classUnderTest.deductmoney(12200));
         assertEquals("balance is insufficient", exception.getMessage());
     }
+
+    @Test void totalamountcredited(){
+        Wallet  w = new Wallet("12ANS",10000);
+        WalletAnalyser k = new WalletAnalyser(w);
+        w.addmoney(2000);
+        w.deductmoney(1000);
+        w.addmoney(5000);
+       assertEquals(k.totalamountcredited(), 7000);
+    }
+    @Test void totalamountdebited(){
+        Wallet  w = new Wallet("12ANS",10000);
+        WalletAnalyser k = new WalletAnalyser(w);
+        w.addmoney(2000);
+        w.deductmoney(1000);
+        w.addmoney(5000);
+       assertEquals(k.totalamountdebited(), 1000);
+    }
+   @Test void expenditure(){
+         Wallet  w = new Wallet("12ANS",10000);
+         WalletAnalyser k = new WalletAnalyser(w);
+         LocalDateTime start = LocalDateTime.now().minusSeconds(10);
+         w.addmoney(2000);
+         w.deductmoney(300);
+         w.deductmoney(850);
+         w.deductmoney(1100);
+        LocalDateTime end = LocalDateTime.now().plusSeconds(10);;
+        assertEquals(2250, k.expenditure(start,end));
+    }
+    
 }
