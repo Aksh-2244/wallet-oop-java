@@ -1,10 +1,10 @@
 package project.var;
 import  java.time.LocalDateTime;
+import java.util.*;
 public class Wallet {
     private String UpiId;
     private double balance;
-    private Transaction[] Transactions;
-    private int op = 0;
+    private List <Transaction> Transactions = new ArrayList<>();
     Wallet(String Id,double b){
         this.UpiId = Id;
         if(b<0){
@@ -12,15 +12,15 @@ public class Wallet {
         }else{
           this.balance = b;;
         }
-        this.Transactions = new Transaction[500];
+        this.Transactions = null;
     }
     public void addmoney(double k){
        if(k<0){
         throw new IllegalArgumentException("Amount cannot be negative");
        }else{
          balance+=k;
-         Transactions[op] = new Transaction(UpiId, k, true,LocalDateTime.now());
-         op++;
+         Transaction e = new Transaction(UpiId, k, true,LocalDateTime.now());
+         Transactions.add(e);
        }
     }
     public void deductmoney(double k){
@@ -30,8 +30,8 @@ public class Wallet {
         throw new IllegalArgumentException("balance is insufficient");
      }else{
         balance-=k;
-       Transactions[op] = new Transaction(UpiId, k, false,LocalDateTime.now());
-        op++;
+       Transaction e = new Transaction(UpiId, k, false,LocalDateTime.now());
+       Transactions.add(e);
      } 
     }
     public String getUpiId(){
@@ -42,14 +42,14 @@ public class Wallet {
     }
     public String getlatestTransaction(){
          return "TransactionId " + UpiId
-        + "\nTransaction amount-" + Transactions[op-1].getamount()
-        + "\nTransaction type-" + Transactions[op-1].getcredit();
+        + "\nTransaction amount-" + Transactions.get(Transactions.size()-1).getamount()
+        + "\nTransaction type-" + Transactions.get(Transactions.size()-1).getcredit();
     }
-    public Transaction[] getTransactions(){
-         return Transactions.clone();
+    public List<Transaction> getTransactions(){
+         return Collections.unmodifiableList(Transactions);
     }
-    public int getOP(){
-        return op;
+    public int nooftransactionsdone(){
+        return Transactions.size();
     }
 
 }
