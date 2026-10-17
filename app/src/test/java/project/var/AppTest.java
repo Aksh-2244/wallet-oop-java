@@ -13,40 +13,40 @@ class AppTest {
     @Test void Transaction() {
         Transaction classUnderTest = new Transaction("12ANS",3000,true,LocalDateTime.now());
         assertEquals(classUnderTest.getTransactionId(),"12ANS");
-        assertEquals(classUnderTest.getamount(),3000);
-        assertEquals(classUnderTest. getcredit(),true);
+        assertEquals(3000,classUnderTest.getamount());
+        assertEquals(true,classUnderTest. getcredit());
     }
       @Test void Wallet() {
         Wallet classUnderTest = new Wallet("12ANS",10000);
-        assertEquals(classUnderTest.getUpiId(),"12ANS");
-        assertEquals(classUnderTest.getbalance(),10000);
+        assertEquals("12ANS",classUnderTest.getUpiId());
+        assertEquals(10000,classUnderTest.getbalance());
     }
      @Test void failedinitiation() {
        IllegalArgumentException exception =
         assertThrows(IllegalArgumentException.class,
             () -> new Wallet("12ANS",-1000));
-        assertEquals("Balance cannot be negative", exception.getMessage());
+        assertEquals(exception.getMessage(),"Balance cannot be negative");
     }
 
      @Test void negativewithdrawal() {
         Wallet classUnderTest = new Wallet("12ANS",10000);
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
             () -> classUnderTest.deductmoney(-200));
-        assertEquals("Amount cannot be negative", exception.getMessage()); 
+        assertEquals(exception.getMessage(),"Amount cannot be negative"); 
     }
 
      @Test void negativedeposit() {
         Wallet classUnderTest = new Wallet("12ANS",10000);
        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
             () -> classUnderTest.addmoney(-200));
-        assertEquals("Amount cannot be negative", exception.getMessage());
+        assertEquals(exception.getMessage(),"Amount cannot be negative");
     }
    
     @Test void insufficientfunds() {
         Wallet classUnderTest = new Wallet("12ANS",10000);
        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
             () -> classUnderTest.deductmoney(12200));
-        assertEquals("balance is insufficient", exception.getMessage());
+        assertEquals(exception.getMessage(),"balance is insufficient");
     }
 
     @Test void totalamountcredited(){
@@ -55,7 +55,7 @@ class AppTest {
         w.addmoney(2000);
         w.deductmoney(1000);
         w.addmoney(5000);
-       assertEquals(k.totalamountcredited(), 7000);
+       assertEquals(7000,k.totalamountcredited());
     }
     @Test void totalamountdebited(){
         Wallet  w = new Wallet("12ANS",10000);
@@ -63,7 +63,7 @@ class AppTest {
         w.addmoney(2000);
         w.deductmoney(1000);
         w.addmoney(5000);
-       assertEquals(k.totalamountdebited(), 1000);
+       assertEquals(1000, k.totalamountdebited());
     }
    @Test void expenditure(){
          Wallet  w = new Wallet("12ANS",10000);
@@ -74,7 +74,7 @@ class AppTest {
          w.deductmoney(850);
          w.deductmoney(1100);
         LocalDateTime end = LocalDateTime.now().plusSeconds(10);;
-        assertEquals(2250, k.expenditure(start,end));
+        assertEquals(k.expenditure(start,end),2250);
     }
     
 }

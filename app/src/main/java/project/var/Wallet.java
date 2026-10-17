@@ -10,9 +10,8 @@ public class Wallet {
         if(b<0){
             throw new IllegalArgumentException("Balance cannot be negative");
         }else{
-          this.balance = b;;
+          this.balance = b;
         }
-        this.Transactions = null;
     }
     public void addmoney(double k){
        if(k<0){
