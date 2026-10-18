@@ -76,5 +76,11 @@ class AppTest {
         LocalDateTime end = LocalDateTime.now().plusSeconds(10);;
         assertEquals(k.expenditure(start,end),2250);
     }
+    @Test void getTransactionIdandUpiid(){
+         Wallet  w = new Wallet("12ANS",10000);
+         w.addmoney(2000);
+         assertEquals("TransactionId TKN11\nTransaction amount-2000.0\nTransaction type-true", w.getlatestTransaction());
+         assertEquals("12ANS",w.getUpiId());
+    }
     
 }

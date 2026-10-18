@@ -42,7 +42,7 @@ public class Wallet {
         return balance;
     }
     public String getlatestTransaction(){
-         return "TransactionId " + UpiId
+         return "TransactionId " + Transactions.get(Transactions.size()-1).getTransactionId()
         + "\nTransaction amount-" + Transactions.get(Transactions.size()-1).getamount()
         + "\nTransaction type-" + Transactions.get(Transactions.size()-1).getcredit();
     }
