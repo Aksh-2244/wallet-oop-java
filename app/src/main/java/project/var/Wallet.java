@@ -17,8 +17,9 @@ public class Wallet {
        if(k<0){
         throw new IllegalArgumentException("Amount cannot be negative");
        }else{
+         String s = "TKN" + (Transactions.size()+1) + "1";
          balance+=k;
-         Transaction e = new Transaction(UpiId, k, true,LocalDateTime.now());
+         Transaction e = new Transaction(s, k, true,LocalDateTime.now());
          Transactions.add(e);
        }
     }
@@ -28,8 +29,9 @@ public class Wallet {
      }else if(k>balance){
         throw new IllegalArgumentException("balance is insufficient");
      }else{
+        String s = "TKN" + (Transactions.size()+1) + "0";
         balance-=k;
-       Transaction e = new Transaction(UpiId, k, false,LocalDateTime.now());
+       Transaction e = new Transaction(s, k, false,LocalDateTime.now());
        Transactions.add(e);
      } 
     }
@@ -40,7 +42,7 @@ public class Wallet {
         return balance;
     }
     public String getlatestTransaction(){
-         return "TransactionId " + UpiId
+         return "\nTransactionId " + Transactions.get(Transactions.size()-1).getTransactionId()
         + "\nTransaction amount-" + Transactions.get(Transactions.size()-1).getamount()
         + "\nTransaction type-" + Transactions.get(Transactions.size()-1).getcredit();
     }
@@ -50,7 +52,9 @@ public class Wallet {
     public int nooftransactionsdone(){
         return Transactions.size();
     }
-
+    public String getanytransaction(int i){
+       return Transactions.get(i-1).getTransaction();
+    }
 }
 
 

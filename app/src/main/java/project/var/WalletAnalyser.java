@@ -37,4 +37,11 @@ public class WalletAnalyser {
         }
         return a;
 }
+     public String getallTransactions(){
+         String all = "";
+        for(int i = 1;i<=wallet.nooftransactionsdone();i++){
+           all += wallet.getanytransaction(i);
+        }
+        return all;
+     }
 }
