@@ -42,7 +42,7 @@ public class Wallet {
         return balance;
     }
     public String getlatestTransaction(){
-         return "TransactionId " + Transactions.get(Transactions.size()-1).getTransactionId()
+         return "\nTransactionId " + Transactions.get(Transactions.size()-1).getTransactionId()
         + "\nTransaction amount-" + Transactions.get(Transactions.size()-1).getamount()
         + "\nTransaction type-" + Transactions.get(Transactions.size()-1).getcredit();
     }
@@ -52,7 +52,9 @@ public class Wallet {
     public int nooftransactionsdone(){
         return Transactions.size();
     }
-
+    public String getanytransaction(int i){
+       return Transactions.get(i-1).getTransaction();
+    }
 }
 
 

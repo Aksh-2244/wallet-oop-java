@@ -25,4 +25,8 @@ public class Transaction {
     public LocalDateTime getTime(){
         return timestamp;
     }
+    public String getTransaction(){
+        String isCredit = credit_transaction ? "yes" : "no";
+        return "\nTransaction id- " + Transation_Id + "\nAmount- " + amount + "\nCredit- " + isCredit + "\nTime-" + timestamp;
+    }
 }

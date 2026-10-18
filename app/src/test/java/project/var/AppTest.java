@@ -76,11 +76,37 @@ class AppTest {
         LocalDateTime end = LocalDateTime.now().plusSeconds(10);;
         assertEquals(k.expenditure(start,end),2250);
     }
-    @Test void getTransactionIdandUpiid(){
+    @Test void getLatestTransactionIdandUpiid(){
          Wallet  w = new Wallet("12ANS",10000);
          w.addmoney(2000);
-         assertEquals("TransactionId TKN11\nTransaction amount-2000.0\nTransaction type-true", w.getlatestTransaction());
+         assertEquals("\nTransactionId TKN11\nTransaction amount-2000.0\nTransaction type-true", w.getlatestTransaction());
          assertEquals("12ANS",w.getUpiId());
     }
+
+    @Test void getanytransaction(){
+          Wallet  w = new Wallet("12ANS",10000);
+          w.addmoney(2000);
+          w.deductmoney(300);
+          w.addmoney(200);
+          w.addmoney(800);
+          String s = w.getanytransaction(3);
+          assertTrue(s.contains("Amount- 200"));
+          assertTrue(s.contains("Credit- yes"));
+          
+    }
     
+    @Test void getallTransactions(){
+          Wallet  w = new Wallet("12ANS",10000);
+          WalletAnalyser k = new WalletAnalyser(w);
+          w.addmoney(2000);
+          w.deductmoney(300);
+          w.addmoney(200);
+          w.addmoney(800);
+          String s = w.getanytransaction(1) +
+                     w.getanytransaction(2) +
+                     w.getanytransaction(3)+
+                     w.getanytransaction(4);
+        assertEquals(s, k.getallTransactions());
+    }
 }
+
